@@ -47,4 +47,6 @@ int a_law_pcm_to_wav(const char *pcm_file, const char *wav);
  */
 + (int)timeLengthWithWaveData:(NSData*)data;
 
++ (int)returnDerationTime:(NSData*)data;
+
 @end

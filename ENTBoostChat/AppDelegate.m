@@ -64,7 +64,7 @@
     //12345678abc
     //设置服务器连接地址 /10.5.35.55
     //NSString* serverAddress = @"172.18.201.89:18012";
-    NSString* serverAddress = @"10.5.35.66:18012";
+    NSString* serverAddress = @"10.5.35.210:18012";
     //[self dataForKey:EBCHAT_ESRVER_ADDRESS_KEY];
     if (serverAddress && serverAddress.length)
         [ENTBoostKit setServerAddress:serverAddress];

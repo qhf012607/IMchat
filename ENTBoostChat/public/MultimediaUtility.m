@@ -312,7 +312,7 @@ int GetWavTimeLength2(char* bytes)
 
 #pragma pop //恢复编译期记忆的对齐值
 
-
+#import <AVFoundation/AVFoundation.h>
 @implementation MultimediaUtility
 
 + (int)translateIOSWav:(NSString*)iosWavFilePath toStandardWav:(NSString*)standardwavFilePath
@@ -328,6 +328,13 @@ int GetWavTimeLength2(char* bytes)
 + (int)timeLengthWithWaveData:(NSData*)data
 {
     return GetWavTimeLength2((char*)[data bytes]);
+}
+
++ (int)returnDerationTime:(NSData*)data{
+    AVAudioPlayer* player = [[AVAudioPlayer alloc] initWithData:data error:nil];
+    
+    int duration = player.duration;
+    return duration;
 }
 
 @end

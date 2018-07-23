@@ -822,7 +822,8 @@ const NSInteger tagOfReceiveFileAlertView = 200;
         //计算语音消息播放时长(WAV格式)
         int timeLength = 0;
         if (audioDot.byteSize>=44)
-            timeLength = [MultimediaUtility timeLengthWithWaveData:audioDot.data];
+            timeLength = [MultimediaUtility returnDerationTime:audioDot.data];
+            //[MultimediaUtility timeLengthWithWaveData:audioDot.data];
         if (timeLength==0)
             NSLog(@"zero time length of audio message msgId = %llu", message.msgId);
         

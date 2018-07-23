@@ -1851,11 +1851,11 @@ static const CGFloat toolbarHiddenHeight = 44.0f; //“发送其它”工具栏�
             NSLog(@"发送语音");
 //            [[AudioToolkit sharedInstance] playFile:recorder.url];
             NSString* filePath = [recorder.url absoluteString];
-            NSString* newFilePath = [NSString stringWithFormat:@"%@.1", filePath];
-            int len1 = [MultimediaUtility translateIOSWav:filePath toStandardWav:newFilePath];
-            int len = [MultimediaUtility timeLengthWithWaveFile:newFilePath];
-            NSLog(@"len = %@, len1 = %@", @(len), @(len1));
-            [self sendAudioData:[NSData dataWithContentsOfFile:newFilePath]];
+         //   NSString* newFilePath = [NSString stringWithFormat:@"%@.1", filePath];
+//            int len1 = [MultimediaUtility translateIOSWav:filePath toStandardWav:newFilePath];
+//            int len = [MultimediaUtility timeLengthWithWaveFile:newFilePath];
+        //    NSLog(@"len = %@, len1 = %@", @(len), @(len1));
+            [self sendAudioData:[NSData dataWithContentsOfFile:filePath]];
         } else { //如果录制时间<1 不发送
             NSLog(@"录音时间过短(%.1f)，不发送", cTime);
             //删除录制文件
@@ -1882,7 +1882,7 @@ static const CGFloat toolbarHiddenHeight = 44.0f; //“发送其它”工具栏�
     message.isReaded = YES;
     message.isSent = NO;
     message.isSentFailure = NO;
-    
+    message.talkId = self.talkId;
     EBChatAudio* chatAudio = [[EBChatAudio alloc] initWithData:data audioType:EB_CHAT_ENTITY_AUDIO_WAV];
     [message addChatDot:chatAudio];
     
