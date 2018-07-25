@@ -255,6 +255,7 @@ char *OSTypeToStr(char *buf, OSType t)
 //发起邀请通话
 - (IBAction)requestTalk:(id)sender
 {
+    
 //    self.stateLabel.text = @"请求通话......";
     [self setWorkState:AV_WORK_STATE_ALERTING];
     

@@ -900,6 +900,7 @@
 //被邀请加入视频通话的事件
 - (void)onAVRequest:(uint64_t)callId fromUid:(uint64_t)fromUid includeVideo:(BOOL)includeVideo
 {
+    [self addLocalNotification];
     [self.tabBarController.talksController handleAVRequest:callId fromUid:fromUid includeVideo:includeVideo];
 }
 
