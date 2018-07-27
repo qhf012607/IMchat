@@ -328,7 +328,7 @@
     }
 }
 
-- (void)addLocalNotification
+- (void)addLocalNotification:(BOOL)ifphocall
 {
     //间隔超过2秒才可以发一次通知，防止高频率刷屏
     BOOL needExecute = NO;
@@ -354,7 +354,11 @@
         notification.fireDate=[[NSDate date] dateByAddingTimeInterval:1];
         //使用本地时区
         notification.timeZone=[NSTimeZone defaultTimeZone];
-        notification.alertBody= [NSString stringWithFormat:@"您有%lu条未读聊天信息", (unsigned long)[[ENTBoostKit sharedToolKit] countOfUnreadMessages]];
+        if (ifphocall) {
+            notification.alertBody= @"语音通话邀请";
+        }else{
+            notification.alertBody= [NSString stringWithFormat:@"您有%lu条未读聊天信息", (unsigned long)[[ENTBoostKit sharedToolKit] countOfUnreadMessages]];
+        }
         //通知提示音
         notification.soundName= UILocalNotificationDefaultSoundName;
         notification.alertAction= NSLocalizedString(@"您有新消息", nil);
@@ -828,7 +832,7 @@
 //接收到聊天消息
 - (void)onRecevieMessage:(EBMessage*)message
 {
-    [self addLocalNotification];
+    [self addLocalNotification:false];
     [self.tabBarController.talksController dispatchReceviedMessage:message ackBlock:nil cancelBlock:nil];
 }
 
@@ -900,7 +904,7 @@
 //被邀请加入视频通话的事件
 - (void)onAVRequest:(uint64_t)callId fromUid:(uint64_t)fromUid includeVideo:(BOOL)includeVideo
 {
-    [self addLocalNotification];
+    [self addLocalNotification:true];
     [self.tabBarController.talksController handleAVRequest:callId fromUid:fromUid includeVideo:includeVideo];
 }
 
