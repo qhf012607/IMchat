@@ -26,7 +26,7 @@
 }
 //用于远程推送的设备令牌
 @property(atomic, strong) NSString* deviceToken;
-
+@property(nonatomic,assign) BOOL background;
 @end
 
 @implementation AppDelegate
@@ -110,6 +110,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:EBCHAT_NOTIFICATION_MANUAL_LOGON_FAILURE object:nil]; //手工登录成功
     [[NSNotificationCenter defaultCenter] removeObserver:self name:EBCHAT_NOTIFICATION_LOGON_EXECUTING object:nil]; //正在执行登录
 }
+
 
 //初始化环境
 - (void)initENTBoostKit
@@ -523,13 +524,14 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
+     self.background = true;
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-
+    self.background = false;
     //清除所有本地通知
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
 }
@@ -832,7 +834,9 @@
 //接收到聊天消息
 - (void)onRecevieMessage:(EBMessage*)message
 {
-    [self addLocalNotification:false];
+    if (self.background) {
+        [self addLocalNotification:false];
+    }
     [self.tabBarController.talksController dispatchReceviedMessage:message ackBlock:nil cancelBlock:nil];
 }
 
@@ -904,7 +908,9 @@
 //被邀请加入视频通话的事件
 - (void)onAVRequest:(uint64_t)callId fromUid:(uint64_t)fromUid includeVideo:(BOOL)includeVideo
 {
-    [self addLocalNotification:true];
+    if (self.background) {
+        [self addLocalNotification:false];
+    }
     [self.tabBarController.talksController handleAVRequest:callId fromUid:fromUid includeVideo:includeVideo];
 }
 
