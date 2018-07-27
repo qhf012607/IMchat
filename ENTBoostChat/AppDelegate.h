@@ -47,6 +47,6 @@
 - (void)resetApplicationWithServerAddress:(NSString*)serverAddress;
 
 ///产生本地通知
-- (void)addLocalNotification;
+- (void)addLocalNotification:(BOOL)ifphocall;
 
 @end

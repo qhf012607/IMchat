@@ -735,7 +735,7 @@
                     }
                 } else { //应用在后台
                     AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-                    [appDelegate addLocalNotification];
+                    [appDelegate addLocalNotification:false];
                 }
             }
             
