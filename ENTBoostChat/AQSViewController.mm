@@ -476,9 +476,9 @@ char *OSTypeToStr(char *buf, OSType t)
         [UIApplication sharedApplication].idleTimerDisabled=NO;
     } else if (workState==AV_WORK_STATE_INCOMING) {
 //        [_sound play];
-      //  SystemSoundID soundID = 1005;
-      //  AudioServicesAddSystemSoundCompletion(soundID, NULL, NULL, SoundFinished, (__bridge void*)self); /*添加音频结束时的回调*/
-      //  AudioServicesPlaySystemSound(soundID);
+        SystemSoundID soundID = 1005;
+     //  AudioServicesAddSystemSoundCompletion(soundID, NULL, NULL, SoundFinished, (__bridge void*)self); /*添加音频结束时的回调*/
+        AudioServicesPlaySystemSound(soundID);
         
         [self.btn_phoneCall setImage:[UIImage imageNamed:@"phone_call"] forState:UIControlStateNormal];
         [self.btn_phoneCall removeTarget:self action:NULL forControlEvents:UIControlEventTouchUpInside];
