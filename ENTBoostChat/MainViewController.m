@@ -187,7 +187,7 @@
     
     //设置tabBar背景颜色
     if (IOS7) { //IOS7以上版本
-        UIView *bgView = [[UIView alloc] initWithFrame:tabBar.bounds];
+        UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 80)];
         bgView.backgroundColor = [UIColor whiteColor];
         [tabBar insertSubview:bgView atIndex:0];
         tabBar.opaque = YES;
